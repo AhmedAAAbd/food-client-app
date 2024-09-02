@@ -1,14 +1,30 @@
 // src/hooks.server.js
-import { sessions } from '$lib/sessionStore' // Import the shared session store
 
 export async function handle({ event, resolve }) {
-  const sessionId = event.cookies.get('session_id')
-
-  if (sessionId && sessions.has(sessionId)) {
-    event.locals.user = sessions.get(sessionId)
-  } else {
-    event.locals.user = null
+  const token = event.cookies.get('ato')
+  console.log(':::::', token)
+  if (token) {
+    try {
+      const response = await fetch('http://localhost:3030/user-by-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token })
+      })
+      const user = await response.json()
+      console.log('😀🤡😀🤡😀🤡', user)
+      if (!user.isAuthorized) {
+        event.locals.user = null
+      } else {
+        event.locals.user = user
+      }
+    } catch (error) {
+      console.error('Token verification failed:', error)
+      event.locals.user = null // Clear user if token is invalid
+    }
   }
 
-  return resolve(event)
+  const response = await resolve(event)
+  return response
 }

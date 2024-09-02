@@ -3,15 +3,18 @@
   import { goto } from '$app/navigation';
 
   export let form;
-
+  
+  console.log("return form value", form);
   // Ensure the code only runs in the browser
   if (typeof window !== 'undefined') {
     $: console.log("Ahmed, watch this out", form);
 
     // Reactive block that runs whenever `form` changes
     $: if (form?.success === true) {
+      console.log("form is sucess !!!");
       console.log("Successful login", form);
       user.set(form.payload);
+      console.log("check the user store", $user);
       goto("/");  // Client-side navigation to the home page
     }
   }

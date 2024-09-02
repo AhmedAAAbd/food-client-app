@@ -2,7 +2,7 @@
 <script>
   import "../app.css";
   import { user } from "$lib/stores/users.js"; // Import the user store
-  console.log(":x:x:x:", $user);
+  console.log("::layout", $user);
 
   import NavBar from "$lib/sharedComponents/navBar/+page.svelte"; // Import NavBar component
 </script>

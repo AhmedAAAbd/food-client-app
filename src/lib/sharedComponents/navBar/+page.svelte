@@ -1,10 +1,8 @@
 <!-- src/routes/(app)/login/+page.svelte -->
 <script>
   import { user } from "$lib/stores/users.js"; // Import the user store
-  console.log(":x:x:x:", $user);
+  $: console.log("nav bar ", $user);
     
-    console.log("😀😀😀😀😀", user);
-    $: console.log("::::", user);
 </script>
   
   <div class="container mx-auto">
@@ -13,7 +11,7 @@
         <a class="btn btn-ghost text-xl">daisyUI</a>
       </div>
   
-      {#if !user}
+      {#if !$user}
       <!-- Show login/signup buttons when no user is logged in -->
       <div class="px-2">
         <a href="/login" class="btn btn-neutral mx-2">Log in</a>
@@ -27,7 +25,7 @@
             <div class="w-10 rounded-full">
               <img
                 alt="User avatar"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                src={$user.user.avatar} />
             </div>
           </div>
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
