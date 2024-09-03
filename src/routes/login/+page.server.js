@@ -1,6 +1,3 @@
-import { error, redirect } from '@sveltejs/kit'
-import { v4 as uuidv4 } from 'uuid' // UUID generator for unique session IDs
-import { sessions } from '$lib/sessionStore' // Import the shared session store
 // src/routes/(app)/login/+page.server.js
 export async function load({ locals }) {}
 

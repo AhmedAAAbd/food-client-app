@@ -2,6 +2,7 @@
 
 export async function handle({ event, resolve }) {
   const token = event.cookies.get('ato')
+  console.log('hooks running 🍡')
   console.log(':::::', token)
   if (token) {
     try {
